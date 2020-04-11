@@ -1,0 +1,8 @@
+---
+title: "Acerca del proyecto"
+---
+
+Proyecto realizado por: Enrique Rosa Presentación y Diego Martínez del Valle, alumnos del Máster de Ciencias Actuariales y Financieras de la Universidad de Valencia para la asignatura de Procesos Estocásticos.
+
+
+

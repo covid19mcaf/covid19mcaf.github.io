@@ -1,0 +1,28 @@
+name: "Covid-19"
+output_dir: "."
+navbar:
+  title: "Covid-19"
+  left:
+    - text: "Datos"
+      href: index.html
+    - text: "Metodología"
+      href: about.html
+    - text: "Predicciones"
+      icon: glyphicon-signal
+      menu:
+        - text: "Predicciones"
+        - text: "Gráficos"
+          href: graficos.html
+        - text: "Tablas" 
+          href: tablas.html
+        
+  
+  right:
+    - icon: fa.github
+      href: https://github.com/covid19mcaf/covid19mcaf.github.io
+    - text: "Acerca del proyecto"
+      href: acercade.html    
+output:
+  html_document:
+    theme: simplex
+    highlight: textmate

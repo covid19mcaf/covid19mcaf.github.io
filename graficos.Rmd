@@ -1,0 +1,5 @@
+---
+title: "Gráficos"
+---
+
+Gráficos de las predicciones y la evolución de los datos

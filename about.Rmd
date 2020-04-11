@@ -1,0 +1,5 @@
+---
+title: "Metodología aplicada"
+---
+
+La metodología aplicada para el estudio de los datos del Covid-19 y las distintas predicciones realizadas han sido las series temporales.

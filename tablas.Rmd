@@ -1,0 +1,5 @@
+---
+title: "Tablas"
+---
+
+Tablas de las predicciones y la evolución de los datos

@@ -1,0 +1,5 @@
+---
+title: "Datos generales"
+---
+
+En esta sección veremos los datos generales sobre el Covid-19 en España actualizados 
