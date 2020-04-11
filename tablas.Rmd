@@ -1,5 +1,39 @@
 ---
-title: "Tablas"
+title: "Predicciones fallecimientos"
 ---
 
-Tablas de las predicciones y la evolución de los datos
+<div style="text-align: justify">
+##### En esta página encontraremos el análisis gráfico de los fallecimientos acumulados hasta el momento, más la proyección que nos indica el modelo elegido. Además de una tabla que nos muestra las predicciones de fallecimiento diario con los errores observados en el transcurso de los días. 
+<div/>
+
+```{rsetup, echo=FALSE,include=FALSE}
+knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
+
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+library(openxlsx)
+fallecimientosacum<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional.csv",header=FALSE,sep=";")
+datos2<-read.xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/prueba.xlsx")
+lnfallecidos<-as.ts(log(fallecimientosacum))
+library(forecast)
+modelo<-auto.arima(lnfallecidos)
+ajustefallecidos3<-arima(lnfallecidos,order=c(2,2,1))
+pronostico_fallecidos<- forecast((ajustefallecidos3),5,level=95)
+datospred<-exp(pronostico_fallecidos$mean)
+datospred<-round(datospred, digits=0)
+plot(exp(lnfallecidos[]),xlim=c(0,50),ylim=c(0,30000),ylab="Número de fallecimientos", xlab="Días", main="Fallecimientos observados+predicción")
+lines(exp(pronostico_fallecidos$mean), col= "red")
+points(exp(pronostico_fallecidos$mean), col= "red")
+
+
+library(knitr)
+library(kableExtra)
+
+tabla<- kable(datos2,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html") 
+tabla2<-kable_styling(tabla,bootstrap_options = "striped", full_width = F, position = "float_left") 
+tabla3<-column_spec(tabla2, 3, color = "red")
+column_spec(tabla3, 4, color= "green")
+
+```

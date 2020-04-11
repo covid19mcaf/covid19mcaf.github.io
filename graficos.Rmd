@@ -1,5 +1,34 @@
 ---
-title: "Gráficos"
+title: "Predicciones casos"
 ---
 
-Gráficos de las predicciones y la evolución de los datos
+<div style="text-align: justify">
+##### En esta página encontraremos el análisis gráfico de los casos acumulados hasta el momento, más la proyección que nos indica el modelo elegido. Además de una tabla que nos muestra las predicciones de casos diarios con los errores observados en el transcurso de los días. 
+<div/>
+
+```{rsetup, echo=FALSE,include=FALSE}
+knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
+
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+library(openxlsx)
+datos_obs_casos_nacional<-read.xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r.xlsx")
+predicciones_11_04<-read.xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Tabla_predicciones_casos.xlsx")
+casos_nacional<-as.ts(log(datos_obs_casos_nacional))
+library(forecast)
+modelo<-auto.arima(casos_nacional)
+pronostico_casos<- forecast(modelo,5,level=95)
+plot(exp(casos_nacional[]),xlim=c(0,80),ylim=c(0,200000),ylab="Nº casos", xlab="Días", main="Casos observados+predicción")
+lines(exp(pronostico_casos$mean), col= "red")
+points(exp(pronostico_casos$mean), col= "red")
+
+library(knitr)
+library(kableExtra)
+tabla_casos<- kable(predicciones_11_04,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html") 
+tabla2_casos<-kable_styling(tabla_casos,bootstrap_options = "striped", full_width = F, position = "float_left") 
+tabla3_casos<-column_spec(tabla2_casos, 3, color = "red")
+column_spec(tabla3_casos, 4, color= "green")
+
+```

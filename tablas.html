@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>Tablas</title>
+<title>Predicciones fallecimientos</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -103,33 +105,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 41px;
+  padding-top: 60px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h2 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h3 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h4 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h5 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .section h6 {
-  padding-top: 46px;
-  margin-top: -46px;
+  padding-top: 65px;
+  margin-top: -65px;
 }
 .dropdown-submenu {
   position: relative;
@@ -232,6 +234,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -272,7 +275,11 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Datos</a>
+  <a href="index.html">
+    <span class="glyphicon glyphicon-home"></span>
+     
+    Datos
+  </a>
 </li>
 <li>
   <a href="about.html">Metodología</a>
@@ -286,12 +293,11 @@ $(document).ready(function () {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Predicciones</li>
     <li>
-      <a href="graficos.html">Gráficos</a>
+      <a href="graficos.html">Casos</a>
     </li>
     <li>
-      <a href="tablas.html">Tablas</a>
+      <a href="tablas.html">Fallecimientos</a>
     </li>
   </ul>
 </li>
@@ -299,7 +305,7 @@ $(document).ready(function () {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/covid19mcaf/covid19mcaf.github.io">
-    <span class=" fa.github"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -315,12 +321,657 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Tablas</h1>
+<h1 class="title toc-ignore">Predicciones fallecimientos</h1>
 
 </div>
 
 
-<p>Tablas de las predicciones y la evolución de los datos</p>
+<div style="text-align: justify">
+<div id="en-esta-página-encontraremos-el-análisis-gráfico-de-los-fallecimientos-acumulados-hasta-el-momento-más-la-proyección-que-nos-indica-el-modelo-elegido.-además-de-una-tabla-que-nos-muestra-las-predicciones-de-fallecimiento-diario-con-los-errores-observados-en-el-transcurso-de-los-días." class="section level5">
+<h5>En esta página encontraremos el análisis gráfico de los fallecimientos acumulados hasta el momento, más la proyección que nos indica el modelo elegido. Además de una tabla que nos muestra las predicciones de fallecimiento diario con los errores observados en el transcurso de los días.</h5>
+<div/>
+
+
+
+
+<img src="tablas_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<table class="table table-striped" style="width: auto !important; float: left; margin-right: 10px;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Días
+</th>
+<th style="text-align:center;">
+Fallecimientos
+</th>
+<th style="text-align:center;">
+Predicciones
+</th>
+<th style="text-align:center;">
+Error
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+47
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+84
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+120
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+136
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+288
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+309
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+491
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+598
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+767
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+1002
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+1326
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+1720
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+2182
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+2696
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+3434
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+4089
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+4858
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+5690
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+6528
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+27
+</td>
+<td style="text-align:center;">
+7340
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+28
+</td>
+<td style="text-align:center;">
+8189
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+9053
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+30
+</td>
+<td style="text-align:center;">
+10003
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+31
+</td>
+<td style="text-align:center;">
+10935
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+11744
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+12418
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+13055
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+13798
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+36
+</td>
+<td style="text-align:center;">
+14555
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+37
+</td>
+<td style="text-align:center;">
+15238
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+38
+</td>
+<td style="text-align:center;">
+15843
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+39
+</td>
+<td style="text-align:center;">
+16353
+</td>
+<td style="text-align:center;color: red !important;">
+NA
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+40
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;color: red !important;">
+17027
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+41
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;color: red !important;">
+17591
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;color: red !important;">
+18263
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+43
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;color: red !important;">
+18943
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+44
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;color: red !important;">
+19589
+</td>
+<td style="text-align:center;color: green !important;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 
 

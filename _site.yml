@@ -4,25 +4,25 @@ navbar:
   title: "Covid-19"
   left:
     - text: "Datos"
+      icon: glyphicon-home
       href: index.html
     - text: "Metodología"
       href: about.html
     - text: "Predicciones"
       icon: glyphicon-signal
       menu:
-        - text: "Predicciones"
-        - text: "Gráficos"
+        - text: "Casos"
           href: graficos.html
-        - text: "Tablas" 
+        - text: "Fallecimientos" 
           href: tablas.html
         
   
   right:
-    - icon: fa.github
+    - icon: fa-github fa-lg
       href: https://github.com/covid19mcaf/covid19mcaf.github.io
     - text: "Acerca del proyecto"
       href: acercade.html    
 output:
   html_document:
-    theme: simplex
+    theme: flatly
     highlight: textmate
