@@ -18,7 +18,7 @@ navbar:
         - text: "---------"
         - text: "Comunidad de Madrid"
         - text: "Casos"
-          href: casos_cm.html
+          href: Casos_cm.html
         - text: "Fallecimientos"
           href: fallecimientos_cm.html
         
