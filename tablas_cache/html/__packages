@@ -11,3 +11,5 @@ ltsa
 bestglm
 FitAR
 ggplot2
+tidyr
+readxl

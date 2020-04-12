@@ -14,18 +14,30 @@ knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
 
 ```{r, echo=FALSE, warning=FALSE}
 library(openxlsx)
-fallecimientosacum<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional.csv",header=FALSE,sep=";")
-datos2<-read.xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/prueba.xlsx")
+fallecimientosacum<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional11_04.csv",header=FALSE,sep=";")
+fallecimientosacum12_04<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional12_04.csv",header=FALSE,sep=";")
+datos2<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/prueba.xlsx")
+#PREDICCIONES 11/04
 lnfallecidos<-as.ts(log(fallecimientosacum))
 library(forecast)
 modelo<-auto.arima(lnfallecidos)
 ajustefallecidos3<-arima(lnfallecidos,order=c(2,2,1))
 pronostico_fallecidos<- forecast((ajustefallecidos3),5,level=95)
-datospred<-exp(pronostico_fallecidos$mean)
-datospred<-round(datospred, digits=0)
-plot(exp(lnfallecidos[]),xlim=c(0,50),ylim=c(0,30000),ylab="Número de fallecimientos", xlab="Días", main="Fallecimientos observados+predicción")
+
+#PREDICCIONES 12/04
+lnfallecidos12<-as.ts(log(fallecimientosacum12_04))
+modelo12<-auto.arima(lnfallecidos12)
+ajustefallecidos12<-arima(lnfallecidos12,order=c(2,2,1))
+pronostico12<- forecast((ajustefallecidos12),5,level=95)
+datospred12<-round(datospred12, digits=0)
+plot(exp(lnfallecidos12[]),xlim=c(0,50),ylim=c(0,30000),ylab="Número de fallecimientos", xlab="Días", main="Predicciones fallecimientos")
 lines(exp(pronostico_fallecidos$mean), col= "red")
 points(exp(pronostico_fallecidos$mean), col= "red")
+lines(exp(pronostico12$mean), col= "blue")
+points(exp(pronostico12$mean), col= "blue")
+legend(x = "topleft", legend = c("Observados","Prediccion con datos hasta el 11/04/2020", "Predicción con datos hasta el 12/04/2020"),
+       col=c("black","red","blue"), lty=1:3,pch=c((hwd=1),1,1),
+       cex=0.5)
 
 
 library(knitr)
@@ -34,6 +46,15 @@ library(kableExtra)
 tabla<- kable(datos2,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html") 
 tabla2<-kable_styling(tabla,bootstrap_options = "striped", full_width = F, position = "float_left") 
 tabla3<-column_spec(tabla2, 3, color = "red")
-column_spec(tabla3, 4, color= "green")
+column_spec(tabla3, 4, color= "red")
 
+
+#ERRORES
+tablaerroresfall<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/tablerroresfallecimiento.xlsx")
+tab1fall<-kable(tablaerroresfall,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html")
+tab2fall<-kable_styling(tab1fall,bootstrap_options = "striped", full_width = F, position = "float_left")
+tab3fall<-column_spec(tab2fall, 3, color = "red")
+tab4fall<-column_spec(tab3fall, 4, color= "red")
+tab5fall<-column_spec(tab4fall, 2)
+column_spec(tab5fall, 1)
 ```

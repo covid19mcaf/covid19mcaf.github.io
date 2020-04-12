@@ -274,11 +274,7 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
-    <span class="glyphicon glyphicon-home"></span>
-     
-    Datos
-  </a>
+  <a href="index.html">Datos</a>
 </li>
 <li>
   <a href="about.html">Metodología</a>
@@ -292,24 +288,33 @@ $(document).ready(function () {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">España</li>
     <li>
       <a href="graficos.html">Casos</a>
     </li>
     <li>
       <a href="tablas.html">Fallecimientos</a>
     </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Comunidad de Madrid</li>
+    <li>
+      <a href="casos_cm.html">Casos</a>
+    </li>
+    <li>
+      <a href="fallecimientos_cm.html">Fallecimientos</a>
+    </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="acercade.html">Acerca del proyecto</a>
+</li>
+<li>
   <a href="https://github.com/covid19mcaf/covid19mcaf.github.io">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
-</li>
-<li>
-  <a href="acercade.html">Acerca del proyecto</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -325,6 +330,7 @@ $(document).ready(function () {
 </div>
 
 
+ 
 <div style="text-align: justify">
 <div id="la-metodología-aplicada-para-el-estudio-de-los-datos-del-covid-19-y-las-distintas-predicciones-realizadas-han-sido-las-series-temporales." class="section level5">
 <h5>La metodología aplicada para el estudio de los datos del Covid-19 y las distintas predicciones realizadas han sido las series temporales.</h5>
@@ -347,18 +353,14 @@ $(document).ready(function () {
 <div id="la-idea-es-utilizar-en-el-programa-r-studio-una-función-llamada-auto.arima-la-cual-aplica-de-forma-reiterativa-las-distintas-combinaciones-posibles-con-el-fin-de-encontrar-el-modelo-arima-que-minimice-el-criterio-de-información-de-akkaike.-a-partir-del-modelo-se-estudiará-la-significatividad-de-las-variables-de-este-y-luego-se-realizará-un-estudio-de-los-residuos-para-ello-se-utilizaran-correlogramas-el-test-ljung-box-y-un-gráfico-normal-qq-plot." class="section level5">
 <h5>La idea es utilizar en el programa R studio una función llamada auto.arima, la cual aplica de forma reiterativa las distintas combinaciones posibles con el fin de encontrar el modelo ARIMA que minimice el criterio de información de Akkaike. A partir del modelo se estudiará la significatividad de las variables de este y luego se realizará un estudio de los residuos, para ello se utilizaran correlogramas, el test Ljung-Box, y un gráfico Normal qq-plot.</h5>
 <div/>
-
-
-
+<p> </p>
+ 
 <div style="text-align: justify">
 </div>
 <div id="ejemplo-modelo-elegido-para-estimar-los-fallecimientos-acumulados" class="section level3">
 <h3>EJEMPLO (modelo elegido para estimar los fallecimientos acumulados):</h3>
 <div/>
-
-
-
-
+<p> </p>
 <div id="significatividad-de-los-predictores." class="section level4">
 <h4>- Significatividad de los predictores.</h4>
 <pre><code>## 
@@ -373,7 +375,7 @@ $(document).ready(function () {
 </div>
 <div id="correlograma-de-los-residuos." class="section level4">
 <h4>- Correlograma de los residuos.</h4>
-<p><img src="about_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="about_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="significatividad-de-los-residuos" class="section level4">
 <h4>- Significatividad de los residuos</h4>
@@ -411,7 +413,7 @@ $(document).ready(function () {
 </div>
 <div id="normalidad-de-los-residuos." class="section level4">
 <h4>- Normalidad de los residuos.</h4>
-<p><img src="about_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="about_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 </div>
 

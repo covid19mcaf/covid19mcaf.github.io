@@ -8,21 +8,37 @@ En esta sección veremos los datos generales sobre el Covid-19 en España actual
 knitr::opts_chunk$set(cache = TRUE, warning = FALSE, fid.width=7)
 library(ggplot2)
 library(openxlsx)
-datosdiarios<-read.xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/indice.xlsx")
+library(readxl)
+datosdiarios<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/indice.xlsx")
 tabl<- kable(datosdiarios,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html")
-tabl1<-kable_styling(tabl,bootstrap_options = "striped", full_width = F, position = "center")
+tabl1<-kable_styling(tabl,bootstrap_options = "striped", full_width = F, position = "float_left")
 tabl2<-column_spec(tabl1, 3, color = "green")
 tabl3<-column_spec(tabl2, 4, color= "red")
 tabl4<-column_spec(tabl3, 2, color= "red")
 column_spec(tabl4, 1, color = "green")
 
-datos_obs_casos_nacional<-read.xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r.xlsx")
-fechas<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Fechas.csv")
-names(fechas)=c("Fecha")
-datos_unidos<-cbind(datos_obs_casos_nacional,fechas)
-plot(datos_unidos$España, xlim=c(0,70), ylim=c(0,200000), xlab="Días", ylab="Casos", main="Casos COVID-19 en España")
-fallecimientosacum<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional.csv",header=FALSE,sep=";")
-plot(fallecimientosacum$V1,xlim=c(0,50), ylim=c(0,30000), xlab="Días", ylab="Fallecidos", main="Fallecimientos COVID-19 en España")
+
+#GRAFICO GGPLOT
+casos_fecha <- read_excel("Datos/Tabla_predicciones_casos_ggplot.xlsx", 
+    col_types = c("date", "numeric"))
+casos_fecha$Días<-as.Date(casos_fecha$Días)
+grafica<-ggplot(casos_fecha, aes(x=Días,y=Casos, colour="blue"))+
+  geom_line(colour="black")+geom_point(size=2, shape=21, fill="white", colour="blue")+
+  ggtitle("Casos acumulados")+scale_y_continuous(limit=c(0,200000))+theme_minimal()+
+  theme(text = element_text(color="gray20"),legend.position = c("Top"),axis.text = element_text(face="italic"),
+        axis.title.x = element_text(vjust = -1))
+grafica+scale_x_date(date_breaks = "5 days",date_labels = "%d-%m")
+
+fallecidos_fecha <- read_excel("Datos/grafico_fallecidos.xlsx", 
+    col_types = c("date", "numeric"))
+fallecidos_fecha$Días<-as.Date(fallecidos_fecha$Días)
+r<-ggplot(fallecidos_fecha, aes(x=Días, y = Fallecimientos))
+x<-r + geom_line() + geom_point( size=2, shape=21, fill="white", colour="red")
+h<-x + xlab("Días") + ylab("Fallecimientos") + ggtitle("Fallecimientos acumulados") + labs(colour="Fallecimientos") + theme_minimal() + theme(text = element_text(color="gray20"), legend.position = c("top"), axis.text = element_text(face = "italic"), axis.title.x = element_text(vjust = -1)) +  ylim(0,25000)
+h + scale_x_date(date_breaks = "5 days", date_labels = "%d-%m")
+
+
+
 
 
 

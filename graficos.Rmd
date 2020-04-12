@@ -13,22 +13,46 @@ knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
 
 
 ```{r, echo=FALSE, warning=FALSE}
+#DATOS
 library(openxlsx)
-datos_obs_casos_nacional<-read.xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r.xlsx")
-predicciones_11_04<-read.xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Tabla_predicciones_casos.xlsx")
+datos_obs_casos_nacional<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r.xlsx")
+datos_obs_casos_1204<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r_1204.xlsx")
+predicciones_11_04<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Tabla_predicciones_casos.xlsx")
+#PREDICCIONES 11-04
 casos_nacional<-as.ts(log(datos_obs_casos_nacional))
 library(forecast)
 modelo<-auto.arima(casos_nacional)
 pronostico_casos<- forecast(modelo,5,level=95)
-plot(exp(casos_nacional[]),xlim=c(0,80),ylim=c(0,200000),ylab="Nº casos", xlab="Días", main="Casos observados+predicción")
+#PREDICCIONES 12-04
+casos_nacional_1204<-as.ts(log(datos_obs_casos_1204))
+modelo_1204<-auto.arima(casos_nacional_1204)
+pronostico_casos_1204<-forecast(modelo_1204,5, level = 95)
+plot(exp(casos_nacional_1204[]),xlim=c(0,80),ylim=c(0,200000),ylab="Nº casos", xlab="Días", main="Predicciones casos")
+lines(exp(pronostico_casos_1204$mean), col="blue")
+points(exp(pronostico_casos_1204$mean), col="blue")
 lines(exp(pronostico_casos$mean), col= "red")
 points(exp(pronostico_casos$mean), col= "red")
+legend(x = "topleft", legend = c("Observados","Prediccion con datos hasta el 11/04/2020", "Predicción con datos hasta el 12/04/2020"),
+       col=c("black","red","blue"), lty=1:3,pch=c((hwd=1),1,1),
+       cex=0.5)
 
+#TABLA PREDICCIONES
 library(knitr)
 library(kableExtra)
 tabla_casos<- kable(predicciones_11_04,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html") 
 tabla2_casos<-kable_styling(tabla_casos,bootstrap_options = "striped", full_width = F, position = "float_left") 
 tabla3_casos<-column_spec(tabla2_casos, 3, color = "red")
-column_spec(tabla3_casos, 4, color= "green")
+column_spec(tabla3_casos, 4, color= "red")
+
+
+#ERRORES
+tablaerrorescasos<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Tablaerrorescasos.xlsx")
+tab1cas<-kable(tablaerrorescasos,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html")
+tab2cas<-kable_styling(tab1cas,bootstrap_options = "striped", full_width = F, position = "float_left")
+tab3cas<-column_spec(tab2cas, 3, color = "red")
+tab4cas<-column_spec(tab3cas, 4, color= "red")
+tab5cas<-column_spec(tab4cas, 2)
+column_spec(tab5cas, 1)
+
 
 ```

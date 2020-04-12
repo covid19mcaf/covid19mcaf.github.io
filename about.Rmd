@@ -6,6 +6,12 @@ title: "Metodología aplicada"
 knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
 ```
 
+
+
+
+
+
+&nbsp;
 <div style="text-align: justify">
 ##### La metodología aplicada para el estudio de los datos del Covid-19 y las distintas predicciones realizadas han sido las series temporales.
 <div/>
@@ -19,12 +25,21 @@ knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
 ##### La principal hipótesis que debe de cumplirse es que la variable objeto de análisis sea discreta y estacionaria, tanto en media como en varianza. Para ello el estudio se realizará en escala logarítmica y además será necesario tomar diferencias de la variable. 
 ##### La idea es utilizar en el programa R studio una función llamada auto.arima, la cual aplica de forma reiterativa las distintas combinaciones posibles con el fin de encontrar el modelo ARIMA que minimice el criterio de información de Akkaike. A partir del modelo se estudiará la significatividad de las variables de este y luego se realizará un estudio de los residuos, para ello se utilizaran correlogramas, el test Ljung-Box, y un gráfico Normal qq-plot.
 <div/>
+&nbsp;
 
 
 
+
+
+&nbsp;
 <div style="text-align: justify">
 ### EJEMPLO (modelo elegido para estimar los fallecimientos acumulados):
 <div/>
+&nbsp;
+
+
+
+
 
 
 ```{r, results='asis',echo=FALSE, warning=FALSE}

@@ -4,24 +4,31 @@ navbar:
   title: "Covid-19"
   left:
     - text: "Datos"
-      icon: glyphicon-home
       href: index.html
     - text: "Metodología"
       href: about.html
     - text: "Predicciones"
       icon: glyphicon-signal
       menu:
+        - text: "España"
         - text: "Casos"
           href: graficos.html
         - text: "Fallecimientos" 
           href: tablas.html
+        - text: "---------"
+        - text: "Comunidad de Madrid"
+        - text: "Casos"
+          href: casos_cm.html
+        - text: "Fallecimientos"
+          href: fallecimientos_cm.html
         
   
   right:
+    - text: "Acerca del proyecto"
+      href: acercade.html
     - icon: fa-github fa-lg
       href: https://github.com/covid19mcaf/covid19mcaf.github.io
-    - text: "Acerca del proyecto"
-      href: acercade.html    
+       
 output:
   html_document:
     theme: flatly
