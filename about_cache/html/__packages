@@ -13,3 +13,10 @@ FitAR
 ggplot2
 tidyr
 readxl
+tidyverse
+tibble
+readr
+purrr
+dplyr
+stringr
+forcats

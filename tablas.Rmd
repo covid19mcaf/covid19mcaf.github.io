@@ -36,16 +36,23 @@ lnfallecidos13<-as.ts(log(fallecimientosacum13_04))
 modelo13<-auto.arima(lnfallecidos13)
 ajustefallecidos13<-arima(lnfallecidos13,order=c(2,2,1))
 pronostico13<- forecast((ajustefallecidos13),5,level=95)
-plot(exp(lnfallecidos13[]),xlim=c(0,50),ylim=c(0,30000),ylab="Número de fallecimientos", xlab="Días", main="Predicciones fallecimientos")
-lines(exp(pronostico13$mean), col= "green")
-points(exp(pronostico13$mean), col= "green")
-lines(exp(pronostico_fallecidos$mean), col= "red")
-points(exp(pronostico_fallecidos$mean), col= "red")
-lines(exp(pronostico12$mean), col= "blue")
-points(exp(pronostico12$mean), col= "blue")
-legend(x = "topleft", legend = c("Observados","Prediccion con datos hasta el 11/04/2020", "Predicción con datos hasta el 12/04/2020","Predicción con datos hasta el 13/04/2020"),
-       col=c("black","red","blue","green"), lty=1:3,pch=c((hwd=1),1,1),
-       cex=0.5)
+
+#GRAFICA
+fall_pred <- read_excel("Datos/fall_pred.xlsx", 
+    col_types = c("date", "numeric", "numeric","numeric", "numeric"))
+fall_pred$Días<-as.Date(fall_pred$Días)
+grafico2f<-ggplot(fall_pred, aes(x=Días))+geom_line(aes(y=Casos,colour="Observados"))+
+  geom_point(aes(y=Casos,colour="Observados"),size=2, shape=21)
+grafico3f<-grafico2f+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"),size=2, shape=21)
+grafico4f<-grafico3f+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21) 
+grafico5f<-grafico4f+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21)  
+grafico6f<-grafico5f+scale_x_date(date_breaks = "5 days",date_labels = "%d-%m")
+grafico7f<-grafico6f+theme_minimal()+ggtitle("Predicción fallecimientos")
+grafico8f<-grafico7f+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 10/04/2020","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020"),
+                              values = c("black","red","blue","green"))
+grafico9f<-grafico8f+theme(legend.position = c(.2,0.9))
+grafico10f<-grafico9f+scale_y_continuous(limit=c(0,25000))
+grafico10f
 
 
 library(knitr)

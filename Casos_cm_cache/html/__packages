@@ -13,3 +13,10 @@ leaps
 ltsa
 bestglm
 FitAR
+tidyverse
+tibble
+readr
+purrr
+dplyr
+stringr
+forcats

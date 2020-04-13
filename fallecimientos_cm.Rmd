@@ -42,16 +42,23 @@ ajustefallecidosmadrid13<-arima(lnfallecidosmadriddia13, order=c(0,2,2))
 pronosticomadrid13<-forecast((ajustefallecidosmadrid13),5,level=95)
 datosfmadrid13<-exp(pronosticomadrid13$mean)
 datosfmadrid13<-round(datosfmadrid13, digits=0)
-plot(exp(lnfallecidosmadriddia13[]),xlim=c(0,50),ylim=c(0,10000),ylab="Número de fallecimientos", xlab="Días", main="Predicciones fallecimientos", cex.axis=1)
-lines(exp(pronosticomadrid11$mean), col= "red")
-points(exp(pronosticomadrid11$mean), col= "red")
-lines(exp(pronosticomadrid12$mean), col= "blue")
-points(exp(pronosticomadrid12$mean), col= "blue")
-lines(exp(pronosticomadrid13$mean), col= "green")
-points(exp(pronosticomadrid13$mean), col= "green")
-legend(x = "topleft", legend = c("Observados","Prediccion con datos hasta el 11/04/2020", "Predicción con datos hasta el 12/04/2020","Prediccion con datos hasta el 13/04/2020"),
-       col=c("black","red","blue","green"), lty=1:3,pch=c((hwd=1),1,1),
-       cex=0.5)
+
+#GRAFICA
+fall_pred_cm<- read_excel("Datos/Madrid/tablafallecimientosmadrid_ggplot.xlsx", 
+    col_types = c("date", "numeric", "numeric", "numeric", "numeric"))
+fall_pred_cm$Días<-as.Date(fall_pred_cm$Días)
+grafico2_fcm<-ggplot(fall_pred_cm, aes(x=Días))+geom_line(aes(y=Casos,colour="Observados"))+
+  geom_point(aes(y=Casos,colour="Observados"),size=2, shape=21)
+grafico3_fcm<-grafico2_fcm+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"),size=2, shape=21)
+grafico4_fcm<-grafico3_fcm+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21) 
+grafico5_fcm<-grafico4_fcm+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21)  
+grafico6_fcm<-grafico5_fcm+scale_x_date(date_breaks = "5 days",date_labels = "%d-%m")
+grafico7_fcm<-grafico6_fcm+theme_minimal()+ggtitle("Predicción fallecimientos")
+grafico8_fcm<-grafico7_fcm+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 10/04/2020","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020"),
+                              values = c("black","red","blue","green"))
+grafico9_fcm<-grafico8_fcm+theme(legend.position = c(.2,0.9))
+grafico10_fcm<-grafico9_fcm+scale_y_continuous(limit=c(0,10000))
+grafico10_fcm
 
 ```
 
