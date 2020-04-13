@@ -12,10 +12,10 @@ library(readxl)
 datosdiarios<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/indice.xlsx")
 tabl<- kable(datosdiarios,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html")
 tabl1<-kable_styling(tabl,bootstrap_options = "striped", full_width = F, position = "float_left")
-tabl2<-column_spec(tabl1, 3, color = "green")
+tabl2<-column_spec(tabl1, 3, color = "blue")
 tabl3<-column_spec(tabl2, 4, color= "red")
 tabl4<-column_spec(tabl3, 2, color= "red")
-column_spec(tabl4, 1, color = "green")
+column_spec(tabl4, 1, color = "blue")
 
 
 #GRAFICO GGPLOT

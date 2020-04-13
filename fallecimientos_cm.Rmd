@@ -18,7 +18,7 @@ fallecimientosmadriddia11<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.i
 lnfallecidosmadriddia11<-as.ts(log(fallecimientosmadriddia11))
 modelomadrid11<-auto.arima(lnfallecidosmadriddia11)
 ajustefallecidosmadrid11<-arima(lnfallecidosmadriddia11, order=c(0,2,2))
-pronosticomadrid11<-forecast((ajustefallecidosmadrid11),5,level=95)
+pronosticomadrid11<-forecast((ajustefallecidosmadrid11),7,level=95)
 datosfmadrid11<-exp(pronosticomadrid11$mean)
 datosfmadrid11<-round(datosfmadrid11, digits=0)
 ```
@@ -26,7 +26,7 @@ datosfmadrid11<-round(datosfmadrid11, digits=0)
 
 
 ```{r,echo=FALSE, warning=FALSE}
-
+#FALLECIMIENTOS MADRID 12-04
 fallecimientosmadriddia12<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/prediccionesmadriddia12.csv", header = FALSE, sep=";")
 lnfallecidosmadriddia12<-as.ts(log(fallecimientosmadriddia12))
 modelomadrid12<-auto.arima(lnfallecidosmadriddia12)
@@ -34,13 +34,23 @@ ajustefallecidosmadrid12<-arima(lnfallecidosmadriddia12, order=c(0,2,2))
 pronosticomadrid12<-forecast((ajustefallecidosmadrid12),5,level=95)
 datosfmadrid12<-exp(pronosticomadrid12$mean)
 datosfmadrid12<-round(datosfmadrid12, digits=0)
-plot(exp(lnfallecidosmadriddia12[]),xlim=c(0,50),ylim=c(0,10000),ylab="Número de fallecimientos", xlab="Días", main="Fallecimientos observados + predicción", cex.axis=1)
+#FALLECIMIENTOS MADRID 13-04
+fallecimientosmadriddia13<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/prediccionesmadriddia13.csv", header = FALSE, sep=";")
+lnfallecidosmadriddia13<-as.ts(log(fallecimientosmadriddia13))
+modelomadrid13<-auto.arima(lnfallecidosmadriddia13)
+ajustefallecidosmadrid13<-arima(lnfallecidosmadriddia13, order=c(0,2,2))
+pronosticomadrid13<-forecast((ajustefallecidosmadrid13),5,level=95)
+datosfmadrid13<-exp(pronosticomadrid13$mean)
+datosfmadrid13<-round(datosfmadrid13, digits=0)
+plot(exp(lnfallecidosmadriddia13[]),xlim=c(0,50),ylim=c(0,10000),ylab="Número de fallecimientos", xlab="Días", main="Predicciones fallecimientos", cex.axis=1)
 lines(exp(pronosticomadrid11$mean), col= "red")
 points(exp(pronosticomadrid11$mean), col= "red")
 lines(exp(pronosticomadrid12$mean), col= "blue")
 points(exp(pronosticomadrid12$mean), col= "blue")
-legend(x = "topleft", legend = c("Observados","Prediccion con datos hasta el 11/04/2020", "Predicción con datos hasta el 12/04/2020"),
-       col=c("black","red","blue"), lty=1:3,pch=c((hwd=1),1,1),
+lines(exp(pronosticomadrid13$mean), col= "green")
+points(exp(pronosticomadrid13$mean), col= "green")
+legend(x = "topleft", legend = c("Observados","Prediccion con datos hasta el 11/04/2020", "Predicción con datos hasta el 12/04/2020","Prediccion con datos hasta el 13/04/2020"),
+       col=c("black","red","blue","green"), lty=1:3,pch=c((hwd=1),1,1),
        cex=0.5)
 
 ```
@@ -50,7 +60,8 @@ datosmadrid<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madri
 tablamadrid<- kable(datosmadrid,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html") 
 tablamadrid2<-kable_styling(tablamadrid,bootstrap_options = "striped", full_width = F, position = "float_left") 
 tablamadrid3<-column_spec(tablamadrid2, 3, color = "red")
-column_spec(tablamadrid3, 4, color= "red")
+tablamadrid4<-column_spec(tablamadrid3, 4, color = "red")
+column_spec(tablamadrid4, 5, color= "red")
 ```
 
 
@@ -60,7 +71,8 @@ tab1cas<-kable(tablaerrorescasos,padding = 0,align ="c",row.names=FALSE,knitr.ta
 tab2cas<-kable_styling(tab1cas,bootstrap_options = "striped", full_width = F, position = "float_left")
 tab3cas<-column_spec(tab2cas, 3, color = "red")
 tab4cas<-column_spec(tab3cas, 4, color= "red")
-tab5cas<-column_spec(tab4cas, 2)
+tab5cas<-column_spec(tab4cas, 5, color= "red")
+tab6cas<-column_spec(tab5cas, 2)
 column_spec(tab5cas, 1)
 ```
 

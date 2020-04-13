@@ -16,6 +16,7 @@ knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
 library(openxlsx)
 datos_obs_casos_cm1104<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1104.xlsx")
 datos_obs_casos_cm1204<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1204.xlsx")
+datos_obs_casos_cm1304<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1304.xlsx")
 tablapredicciones_cm<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Tabla predicciones madrid.xlsx")
 #PREDICCIONES 11-04
 casos_cm<-as.ts(log(datos_obs_casos_cm1104))
@@ -23,19 +24,25 @@ library(forecast)
 ajuste_casos_cm_1104<-arima(casos_cm,order=c(2,1,0))
 lnpredic_cm_1104<-predict(ajuste_casos_cm_1104, n.ahead = 5)
 predic_cm_1104<-exp(lnpredic_cm_1104[[1]])
-
 #PREDICCIONES 12-04
 casos_cm_1204<-as.ts(log(datos_obs_casos_cm1204))
 ajuste_casos_cm_1204<-arima(casos_cm_1204,order=c(2,1,0))
-lnpredic_cm_1204<-predict(ajuste_casos_cm_1204, n.ahead = 5)
+lnpredic_cm_1204<-predict(ajuste_casos_cm_1204, n.ahead = 6)
 predic_cm_1204<-exp(lnpredic_cm_1204[[1]])
-plot(exp(casos_cm_1204[]),xlim=c(0,80),ylim=c(0,60000),ylab="Nº casos", xlab="Días", main="Casos observados+predicción")
+#PREDICCIONES 13-04
+casos_cm_1304<-as.ts(log(datos_obs_casos_cm1304))
+ajuste_casos_cm_1304<-arima(casos_cm_1304,order=c(2,1,0))
+lnpredic_cm_1304<-predict(ajuste_casos_cm_1304, n.ahead = 5)
+predic_cm_1304<-exp(lnpredic_cm_1304[[1]])
+plot(exp(casos_cm_1304[]),xlim=c(0,80),ylim=c(0,60000),ylab="Nº casos", xlab="Días", main="Predicciones casos")
 lines(predic_cm_1104,col="red")
 points(predic_cm_1104, col="red")
 lines(predic_cm_1204, col="blue")
 points(predic_cm_1204, col="blue")
-legend(x = "topleft", legend = c("Observados","Prediccion con datos hasta el 11/04/2020", "Predicción con datos hasta el 12/04/2020"),
-       col=c("black","red","blue"), lty=1:3,pch=c((hwd=1),1,1),
+lines(predic_cm_1304,col="green")
+points(predic_cm_1304, col="green")
+legend(x = "topleft", legend = c("Observados","Prediccion con datos hasta el 11/04/2020", "Predicción con datos hasta el 12/04/2020","Predicción con datos hasta el 13/04/2020"),
+       col=c("black","red","blue","green"), lty=1:3,pch=c((hwd=1),1,1),
        cex=0.5)
 
 #TABLA PREDICCIONES
@@ -44,7 +51,8 @@ library(kableExtra)
 tabla_casos_cm<- kable(tablapredicciones_cm,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html") 
 tabla2_casos_cm<-kable_styling(tabla_casos_cm,bootstrap_options = "striped", full_width = F, position = "float_left") 
 tabla3_casos_cm<-column_spec(tabla2_casos_cm, 3, color = "red")
-column_spec(tabla3_casos_cm, 4, color= "red")
+tabla4_casos_cm<-column_spec(tabla3_casos_cm, 4, color= "red")
+column_spec(tabla4_casos_cm, 5, color= "red")
 
 #ERRORES
 tablaerrorescasos<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/tablaerrorescasosmadrid.xlsx")
@@ -52,8 +60,9 @@ tab1cas<-kable(tablaerrorescasos,padding = 0,align ="c",row.names=FALSE,knitr.ta
 tab2cas<-kable_styling(tab1cas,bootstrap_options = "striped", full_width = F, position = "float_left")
 tab3cas<-column_spec(tab2cas, 3, color = "red")
 tab4cas<-column_spec(tab3cas, 4, color= "red")
-tab5cas<-column_spec(tab4cas, 2)
-column_spec(tab5cas, 1)
+tab5cas<-column_spec(tab4cas, 5, color="red")
+tab6cas<-column_spec(tab5cas, 2)
+column_spec(tab6cas, 1)
 
 
 
