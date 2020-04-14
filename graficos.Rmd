@@ -19,6 +19,7 @@ library(openxlsx)
 datos_obs_casos_nacional<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r.xlsx")
 datos_obs_casos_1204<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r_1204.xlsx")
 datos_obs_casos_1304<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r_1304.xlsx")
+datos_obs_casos_1404<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r_1404.xlsx")
 predicciones_11_04<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Tabla_predicciones_casos.xlsx")
 
 #PREDICCIONES 11-04
@@ -30,11 +31,16 @@ pronostico_casos<- forecast(modelo,5,level=95)
 #PREDICCIONES 12-04
 casos_nacional_1204<-as.ts(log(datos_obs_casos_1204))
 modelo_1204<-auto.arima(casos_nacional_1204)
-pronostico_casos_1204<-forecast(modelo_1204,5, level = 95)
+pronostico_casos_1204<-forecast(modelo_1204,7, level = 95)
 #PREDICCIONES 13-04
 casos_nacional_1304<-as.ts(log(datos_obs_casos_1304))
 modelo_1304<-auto.arima(casos_nacional_1304)
-pronostico_casos_1304<-forecast(modelo_1304,5, level = 95)
+pronostico_casos_1304<-forecast(modelo_1304,6, level = 95)
+
+#PREDICCIONES 14-04
+casos_nacional_1404<-as.ts(log(datos_obs_casos_1404))
+modelo_1404<-auto.arima(casos_nacional_1404)
+pronostico_casos_1404<-forecast(modelo_1404,5, level = 95)
 
 #GRAFICA
 casos_pred <- read_excel("Datos/Tabla_predicciones_casos_ggplot2.xlsx", 
@@ -42,12 +48,12 @@ casos_pred <- read_excel("Datos/Tabla_predicciones_casos_ggplot2.xlsx",
 casos_pred$Días<-as.Date(casos_pred$Días)
 grafico2<-ggplot(casos_pred, aes(x=Días))+geom_line(aes(y=Casos,colour="Observados"))+
   geom_point(aes(y=Casos,colour="Observados"),size=2, shape=21)
-grafico3<-grafico2+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"),size=2, shape=21)
-grafico4<-grafico3+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21) 
-grafico5<-grafico4+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21)  
+grafico3<-grafico2+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21)
+grafico4<-grafico3+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21) 
+grafico5<-grafico4+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 13/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 13/04/2020"),size=2, shape=21)  
 grafico6<-grafico5+scale_x_date(date_breaks = "5 days",date_labels = "%d-%m")
 grafico7<-grafico6+theme_minimal()+ggtitle("Predicción casos")
-grafico8<-grafico7+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 10/04/2020","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020"),
+grafico8<-grafico7+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020","Predicción con datos hasta el 13/04/2020"),
                               values = c("black","red","blue","green"))
 grafico9<-grafico8+theme(legend.position = c(.2,0.9))
 grafico10<-grafico9+scale_y_continuous(limit=c(0,220000))
@@ -69,9 +75,9 @@ tab1cas<-kable(tablaerrorescasos,padding = 0,align ="c",row.names=FALSE,knitr.ta
 tab2cas<-kable_styling(tab1cas,bootstrap_options = "striped", full_width = F, position = "float_left")
 tab3cas<-column_spec(tab2cas, 3, color = "red")
 tab4cas<-column_spec(tab3cas, 4, color= "red")
-tab5cas<-column_spec(tab4cas, 5, color= "red")
-tab6cas<-column_spec(tab5cas, 2)
-column_spec(tab6cas, 1)
+tab5cas<-column_spec(tab4cas, 2)
+column_spec(tab5cas, 1)
+
 
 
 ```

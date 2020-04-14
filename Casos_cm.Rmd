@@ -17,6 +17,7 @@ library(openxlsx)
 datos_obs_casos_cm1104<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1104.xlsx")
 datos_obs_casos_cm1204<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1204.xlsx")
 datos_obs_casos_cm1304<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1304.xlsx")
+datos_obs_casos_cm1404<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1404.xlsx")
 tablapredicciones_cm<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Tabla predicciones madrid.xlsx")
 #PREDICCIONES 11-04
 casos_cm<-as.ts(log(datos_obs_casos_cm1104))
@@ -27,13 +28,18 @@ predic_cm_1104<-exp(lnpredic_cm_1104[[1]])
 #PREDICCIONES 12-04
 casos_cm_1204<-as.ts(log(datos_obs_casos_cm1204))
 ajuste_casos_cm_1204<-arima(casos_cm_1204,order=c(2,1,0))
-lnpredic_cm_1204<-predict(ajuste_casos_cm_1204, n.ahead = 6)
+lnpredic_cm_1204<-predict(ajuste_casos_cm_1204, n.ahead = 7)
 predic_cm_1204<-exp(lnpredic_cm_1204[[1]])
 #PREDICCIONES 13-04
 casos_cm_1304<-as.ts(log(datos_obs_casos_cm1304))
 ajuste_casos_cm_1304<-arima(casos_cm_1304,order=c(2,1,0))
-lnpredic_cm_1304<-predict(ajuste_casos_cm_1304, n.ahead = 5)
+lnpredic_cm_1304<-predict(ajuste_casos_cm_1304, n.ahead = 6)
 predic_cm_1304<-exp(lnpredic_cm_1304[[1]])
+#PREDICCIONES 14-04
+casos_cm_1404<-as.ts(log(datos_obs_casos_cm1404))
+ajuste_casos_cm_1404<-arima(casos_cm_1404,order=c(2,1,0))
+lnpredic_cm_1404<-predict(ajuste_casos_cm_1404, n.ahead = 5)
+predic_cm_1404<-exp(lnpredic_cm_1404[[1]])
 
 #GRAFICA
 casos_pred_cm<-read_excel("Datos/Madrid/Tabla predicciones madrid_ggplot.xlsx", 
@@ -41,12 +47,12 @@ casos_pred_cm<-read_excel("Datos/Madrid/Tabla predicciones madrid_ggplot.xlsx",
 casos_pred_cm$Días<-as.Date(casos_pred_cm$Días)
 grafico2_cm<-ggplot(casos_pred_cm, aes(x=Días))+geom_line(aes(y=Casos,colour="Observados"))+
   geom_point(aes(y=Casos,colour="Observados"),size=2, shape=21)
-grafico3_cm<-grafico2_cm+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"),size=2, shape=21)
-grafico4_cm<-grafico3_cm+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21) 
-grafico5_cm<-grafico4_cm+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21)  
+grafico3_cm<-grafico2_cm+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21)
+grafico4_cm<-grafico3_cm+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21) 
+grafico5_cm<-grafico4_cm+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 13/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 13/04/2020"),size=2, shape=21)  
 grafico6_cm<-grafico5_cm+scale_x_date(date_breaks = "5 days",date_labels = "%d-%m")
 grafico7_cm<-grafico6_cm+theme_minimal()+ggtitle("Predicción casos")
-grafico8_cm<-grafico7_cm+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 10/04/2020","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020"),
+grafico8_cm<-grafico7_cm+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020","Predicción con datos hasta el 13/04/2020"),
                               values = c("black","red","blue","green"))
 grafico9_cm<-grafico8_cm+theme(legend.position = c(.2,0.9))
 grafico10_cm<-grafico9_cm+scale_y_continuous(limit=c(0,60000))
@@ -67,9 +73,8 @@ tab1cas<-kable(tablaerrorescasos,padding = 0,align ="c",row.names=FALSE,knitr.ta
 tab2cas<-kable_styling(tab1cas,bootstrap_options = "striped", full_width = F, position = "float_left")
 tab3cas<-column_spec(tab2cas, 3, color = "red")
 tab4cas<-column_spec(tab3cas, 4, color= "red")
-tab5cas<-column_spec(tab4cas, 5, color="red")
-tab6cas<-column_spec(tab5cas, 2)
-column_spec(tab6cas, 1)
+tab5cas<-column_spec(tab4cas, 2)
+column_spec(tab5cas, 1)
 
 
 

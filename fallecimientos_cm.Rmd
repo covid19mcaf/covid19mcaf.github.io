@@ -31,7 +31,7 @@ fallecimientosmadriddia12<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.i
 lnfallecidosmadriddia12<-as.ts(log(fallecimientosmadriddia12))
 modelomadrid12<-auto.arima(lnfallecidosmadriddia12)
 ajustefallecidosmadrid12<-arima(lnfallecidosmadriddia12, order=c(0,2,2))
-pronosticomadrid12<-forecast((ajustefallecidosmadrid12),5,level=95)
+pronosticomadrid12<-forecast((ajustefallecidosmadrid12),7,level=95)
 datosfmadrid12<-exp(pronosticomadrid12$mean)
 datosfmadrid12<-round(datosfmadrid12, digits=0)
 #FALLECIMIENTOS MADRID 13-04
@@ -39,9 +39,18 @@ fallecimientosmadriddia13<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.i
 lnfallecidosmadriddia13<-as.ts(log(fallecimientosmadriddia13))
 modelomadrid13<-auto.arima(lnfallecidosmadriddia13)
 ajustefallecidosmadrid13<-arima(lnfallecidosmadriddia13, order=c(0,2,2))
-pronosticomadrid13<-forecast((ajustefallecidosmadrid13),5,level=95)
+pronosticomadrid13<-forecast((ajustefallecidosmadrid13),6,level=95)
 datosfmadrid13<-exp(pronosticomadrid13$mean)
 datosfmadrid13<-round(datosfmadrid13, digits=0)
+#FALLECIMIENTOS MADRID 14-04
+fallecimientosmadriddia14<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/prediccionesmadriddia14.csv", header = FALSE, sep=";")
+lnfallecidosmadriddia14<-as.ts(log(fallecimientosmadriddia14))
+modelomadrid14<-auto.arima(lnfallecidosmadriddia14)
+ajustefallecidosmadrid14<-arima(lnfallecidosmadriddia14, order=c(0,2,2))
+pronosticomadrid14<-forecast((ajustefallecidosmadrid14),5,level=95)
+datosfmadrid14<-exp(pronosticomadrid14$mean)
+datosfmadrid14<-round(datosfmadrid14, digits=0)
+
 
 #GRAFICA
 fall_pred_cm<- read_excel("Datos/Madrid/tablafallecimientosmadrid_ggplot.xlsx", 
@@ -49,12 +58,12 @@ fall_pred_cm<- read_excel("Datos/Madrid/tablafallecimientosmadrid_ggplot.xlsx",
 fall_pred_cm$Días<-as.Date(fall_pred_cm$Días)
 grafico2_fcm<-ggplot(fall_pred_cm, aes(x=Días))+geom_line(aes(y=Casos,colour="Observados"))+
   geom_point(aes(y=Casos,colour="Observados"),size=2, shape=21)
-grafico3_fcm<-grafico2_fcm+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"),size=2, shape=21)
-grafico4_fcm<-grafico3_fcm+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21) 
-grafico5_fcm<-grafico4_fcm+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21)  
+grafico3_fcm<-grafico2_fcm+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21)
+grafico4_fcm<-grafico3_fcm+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21) 
+grafico5_fcm<-grafico4_fcm+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 13/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 13/04/2020"),size=2, shape=21)  
 grafico6_fcm<-grafico5_fcm+scale_x_date(date_breaks = "5 days",date_labels = "%d-%m")
 grafico7_fcm<-grafico6_fcm+theme_minimal()+ggtitle("Predicción fallecimientos")
-grafico8_fcm<-grafico7_fcm+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 10/04/2020","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020"),
+grafico8_fcm<-grafico7_fcm+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020","Predicción con datos hasta el 13/04/2020"),
                               values = c("black","red","blue","green"))
 grafico9_fcm<-grafico8_fcm+theme(legend.position = c(.2,0.9))
 grafico10_fcm<-grafico9_fcm+scale_y_continuous(limit=c(0,10000))
@@ -78,8 +87,7 @@ tab1cas<-kable(tablaerrorescasos,padding = 0,align ="c",row.names=FALSE,knitr.ta
 tab2cas<-kable_styling(tab1cas,bootstrap_options = "striped", full_width = F, position = "float_left")
 tab3cas<-column_spec(tab2cas, 3, color = "red")
 tab4cas<-column_spec(tab3cas, 4, color= "red")
-tab5cas<-column_spec(tab4cas, 5, color= "red")
-tab6cas<-column_spec(tab5cas, 2)
+tab5cas<-column_spec(tab4cas, 2)
 column_spec(tab5cas, 1)
 ```
 

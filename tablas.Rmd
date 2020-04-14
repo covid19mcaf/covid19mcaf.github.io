@@ -17,6 +17,7 @@ library(openxlsx)
 fallecimientosacum<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional11_04.csv",header=FALSE,sep=";")
 fallecimientosacum12_04<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional12_04.csv",header=FALSE,sep=";")
 fallecimientosacum13_04<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional13_04.csv",header=FALSE,sep=";")
+fallecimientosacum14_04<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional14_04.csv",header=FALSE,sep=";")
 datos2<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/prueba.xlsx")
 #PREDICCIONES 11/04
 lnfallecidos<-as.ts(log(fallecimientosacum))
@@ -29,13 +30,18 @@ pronostico_fallecidos<- forecast((ajustefallecidos3),7,level=95)
 lnfallecidos12<-as.ts(log(fallecimientosacum12_04))
 modelo12<-auto.arima(lnfallecidos12)
 ajustefallecidos12<-arima(lnfallecidos12,order=c(2,2,1))
-pronostico12<- forecast((ajustefallecidos12),5,level=95)
+pronostico12<- forecast((ajustefallecidos12),7,level=95)
 datospred12<-round(datospred12, digits=0)
 #PREDICICONES 13/04
 lnfallecidos13<-as.ts(log(fallecimientosacum13_04))
 modelo13<-auto.arima(lnfallecidos13)
 ajustefallecidos13<-arima(lnfallecidos13,order=c(2,2,1))
-pronostico13<- forecast((ajustefallecidos13),5,level=95)
+pronostico13<- forecast((ajustefallecidos13),6,level=95)
+#PREDICCIONES 14/04
+lnfallecidos14<-as.ts(log(fallecimientosacum14_04))
+modelo13<-auto.arima(lnfallecidos14)
+ajustefallecidos14<-arima(lnfallecidos14,order=c(2,2,1))
+pronostico13<- forecast((ajustefallecidos14),5,level=95)
 
 #GRAFICA
 fall_pred <- read_excel("Datos/fall_pred.xlsx", 
@@ -43,12 +49,12 @@ fall_pred <- read_excel("Datos/fall_pred.xlsx",
 fall_pred$Días<-as.Date(fall_pred$Días)
 grafico2f<-ggplot(fall_pred, aes(x=Días))+geom_line(aes(y=Casos,colour="Observados"))+
   geom_point(aes(y=Casos,colour="Observados"),size=2, shape=21)
-grafico3f<-grafico2f+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 10/04/2020"),size=2, shape=21)
-grafico4f<-grafico3f+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21) 
-grafico5f<-grafico4f+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21)  
+grafico3f<-grafico2f+geom_line(aes(y=Pred3,colour="Predicción con datos hasta el 11/04/2020"))+geom_point(aes(y=Pred3,colour="Predicción con datos hasta el 11/04/2020"),size=2, shape=21)
+grafico4f<-grafico3f+geom_line(aes(y=Pred2,colour="Predicción con datos hasta el 12/04/2020"))+geom_point(aes(y=Pred2,colour="Predicción con datos hasta el 12/04/2020"),size=2, shape=21) 
+grafico5f<-grafico4f+geom_line(aes(y=Pred1,colour="Predicción con datos hasta el 13/04/2020"))+geom_point(aes(y=Pred1,colour="Predicción con datos hasta el 13/04/2020"),size=2, shape=21)  
 grafico6f<-grafico5f+scale_x_date(date_breaks = "5 days",date_labels = "%d-%m")
 grafico7f<-grafico6f+theme_minimal()+ggtitle("Predicción fallecimientos")
-grafico8f<-grafico7f+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 10/04/2020","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020"),
+grafico8f<-grafico7f+scale_colour_manual("",breaks=c("Observados","Predicción con datos hasta el 11/04/2020","Predicción con datos hasta el 12/04/2020","Predicción con datos hasta el 13/04/2020"),
                               values = c("black","red","blue","green"))
 grafico9f<-grafico8f+theme(legend.position = c(.2,0.9))
 grafico10f<-grafico9f+scale_y_continuous(limit=c(0,25000))
@@ -71,7 +77,6 @@ tab1fall<-kable(tablaerroresfall,padding = 0,align ="c",row.names=FALSE,knitr.ta
 tab2fall<-kable_styling(tab1fall,bootstrap_options = "striped", full_width = F, position = "float_left")
 tab3fall<-column_spec(tab2fall, 3, color = "red")
 tab4fall<-column_spec(tab3fall, 4, color= "red")
-tab5fall<-column_spec(tab4fall, 5, color = "red")
-tab6fall<-column_spec(tab5fall, 2)
-column_spec(tab6fall, 1)
+tab5fall<-column_spec(tab4fall, 2)
+column_spec(tab5fall, 1)
 ```

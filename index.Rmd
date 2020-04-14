@@ -5,7 +5,6 @@ title: "Datos generales"
 En esta sección veremos los datos generales sobre el Covid-19 en España actualizados 
 
 ```{r, echo=FALSE, warning=FALSE}
-knitr::opts_chunk$set(cache = TRUE, warning = FALSE, fid.width=7)
 library(ggplot2)
 library(openxlsx)
 library(readxl)
@@ -36,10 +35,6 @@ r<-ggplot(fallecidos_fecha, aes(x=Días, y = Fallecimientos))
 x<-r + geom_line() + geom_point( size=2, shape=21, fill="white", colour="red")
 h<-x + xlab("Días") + ylab("Fallecimientos") + ggtitle("Fallecimientos acumulados") + labs(colour="Fallecimientos") + theme_minimal() + theme(text = element_text(color="gray20"), legend.position = c("top"), axis.text = element_text(face = "italic"), axis.title.x = element_text(vjust = -1)) +  ylim(0,25000)
 h + scale_x_date(date_breaks = "5 days", date_labels = "%d-%m")
-
-
-
-
 
 
 ```
