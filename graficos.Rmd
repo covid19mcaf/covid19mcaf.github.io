@@ -16,6 +16,7 @@ knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
 #DATOS
 library(readxl)
 library(openxlsx)
+options(knitr.kable.NA='')
 datos_obs_casos_nacional<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r.xlsx")
 datos_obs_casos_1204<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r_1204.xlsx")
 datos_obs_casos_1304<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Covid_19_casos_nacional_r_1304.xlsx")
@@ -70,6 +71,7 @@ column_spec(tabla4_casos, 5, color= "red")
 
 
 #ERRORES
+options(knitr.kable.NA='')
 tablaerrorescasos<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Tablaerrorescasos.xlsx")
 tab1cas<-kable(tablaerrorescasos,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html")
 tab2cas<-kable_styling(tab1cas,bootstrap_options = "striped", full_width = F, position = "float_left")

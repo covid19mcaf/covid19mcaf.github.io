@@ -14,6 +14,7 @@ knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
 ```{r, echo=FALSE, warning=FALSE}
 #DATOS
 library(openxlsx)
+options(knitr.kable.NA='')
 datos_obs_casos_cm1104<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1104.xlsx")
 datos_obs_casos_cm1204<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1204.xlsx")
 datos_obs_casos_cm1304<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/Casosmadrid_1304.xlsx")

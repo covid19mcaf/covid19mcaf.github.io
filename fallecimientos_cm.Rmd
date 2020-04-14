@@ -72,6 +72,7 @@ grafico10_fcm
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
+options(knitr.kable.NA='')
 datosmadrid<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/tablafallecimientosmadrid.xlsx")
 tablamadrid<- kable(datosmadrid,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html") 
 tablamadrid2<-kable_styling(tablamadrid,bootstrap_options = "striped", full_width = F, position = "float_left") 
@@ -82,6 +83,7 @@ column_spec(tablamadrid4, 5, color= "red")
 
 
 ```{r, echo=FALSE, warning=FALSE}
+options(knitr.kable.NA='')
 tablaerrorescasos<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/Madrid/tablaerroresfallecimientosmadrid.xlsx")
 tab1cas<-kable(tablaerrorescasos,padding = 0,align ="c",row.names=FALSE,knitr.table.format = "html")
 tab2cas<-kable_styling(tab1cas,bootstrap_options = "striped", full_width = F, position = "float_left")

@@ -14,6 +14,7 @@ knitr::opts_chunk$set(cache=TRUE, warning = FALSE, echo=FALSE, fig.width= 7)
 
 ```{r, echo=FALSE, warning=FALSE}
 library(openxlsx)
+options(knitr.kable.NA='')
 fallecimientosacum<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional11_04.csv",header=FALSE,sep=";")
 fallecimientosacum12_04<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional12_04.csv",header=FALSE,sep=";")
 fallecimientosacum13_04<-read.csv("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Datos/mortalidadnacional13_04.csv",header=FALSE,sep=";")
