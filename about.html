@@ -334,85 +334,95 @@ $(document).ready(function () {
 <div style="text-align: justify">
 <div id="la-metodología-aplicada-para-el-estudio-de-los-datos-del-covid-19-y-las-distintas-predicciones-realizadas-han-sido-las-series-temporales." class="section level5">
 <h5>La metodología aplicada para el estudio de los datos del Covid-19 y las distintas predicciones realizadas han sido las series temporales.</h5>
-<div/>
-
-<div style="text-align: justify">
 </div>
-<div id="a-continuación-mostraremos-un-ejemplo-de-análisis-exponiendo-los-distintos-tests-y-gráficos-utilizados-con-el-objetivo-de-poder-realizar-predicciones-consistentes-bajo-un-marco-teórico-estable." class="section level5">
-<h5>A continuación mostraremos un ejemplo de análisis, exponiendo los distintos tests y gráficos utilizados con el objetivo de poder realizar predicciones consistentes bajo un marco teórico estable.</h5>
-<div/>
-
-<div style="text-align: justify">
+<div id="las-cuales-se-pueden-definir-como-un-caso-particular-de-los-procesos-estocásticos.-el-objetivo-de-estas-consiste-en-estudiar-el-comportamiento-de-una-variables-con-respecto-al-tiempo-consecuentemente-las-series-temporales-tratan-de-estimar-el-comportamiento-de-una-variable-respecto-a-sus-valores-pasados.-los-datos-serán-recogidos-diariamente-de-la-web-del-ministerio-de-sanidad-y-el-horizonte-de-predicción-óptimo-se-estima-entre-uno-y-tres-días." class="section level5">
+<h5>Las cuales se pueden definir como un caso particular de los procesos estocásticos. El objetivo de estas consiste en estudiar el comportamiento de una variables con respecto al tiempo, consecuentemente, las series temporales tratan de estimar el comportamiento de una variable respecto a sus valores pasados. Los datos serán recogidos diariamente de la web del Ministerio de Sanidad y el horizonte de predicción óptimo se estima entre uno y tres días.</h5>
 </div>
-<div id="en-primer-lugar-resultará-necesario-estudiar-el-comportamiento-de-nuestros-datos-hemos-de-destacar-que-su-naturaleza-nos-fuerza-a-realizar-distintas-transformaciones-para-poder-realizar-estimaciones." class="section level5">
-<h5>En primer lugar, resultará necesario estudiar el comportamiento de nuestros datos, hemos de destacar que su naturaleza nos fuerza a realizar distintas transformaciones para poder realizar estimaciones.</h5>
+<div id="debemos-destacar-que-un-requisito-indispensable-para-tratar-una-serie-temporal-consiste-en-que-se-comporte-como-una-variable-estacionaria-por-tanto-en-caso-de-su-no-estacionariedad-serán-necesarias-distintas-transformaciones." class="section level5">
+<h5>Debemos destacar que un requisito indispensable para tratar una serie temporal consiste en que se comporte como una variable estacionaria, por tanto, en caso de su no estacionariedad, serán necesarias distintas transformaciones.</h5>
 </div>
-<div id="la-principal-hipótesis-que-debe-de-cumplirse-es-que-la-variable-objeto-de-análisis-sea-discreta-y-estacionaria-tanto-en-media-como-en-varianza.-para-ello-el-estudio-se-realizará-en-escala-logarítmica-y-además-será-necesario-tomar-diferencias-de-la-variable." class="section level5">
-<h5>La principal hipótesis que debe de cumplirse es que la variable objeto de análisis sea discreta y estacionaria, tanto en media como en varianza. Para ello el estudio se realizará en escala logarítmica y además será necesario tomar diferencias de la variable.</h5>
+<div id="además-nuestro-estudio-se-realizará-respecto-a-una-variable-flujo-casos-o-fallecimientos-acumulados.-en-concreto-en-la-metodología-utilizaremos-el-modelo-elegido-para-predecir-los-fallecimientos-a-nivel-nacional." class="section level5">
+<h5>Además nuestro estudio se realizará respecto a una variable flujo: “Casos o fallecimientos acumulados”. En concreto en la metodología utilizaremos el modelo elegido para predecir los fallecimientos a nivel nacional.</h5>
 </div>
-<div id="la-idea-es-utilizar-en-el-programa-r-studio-una-función-llamada-auto.arima-la-cual-aplica-de-forma-reiterativa-las-distintas-combinaciones-posibles-con-el-fin-de-encontrar-el-modelo-arima-que-minimice-el-criterio-de-información-de-akkaike.-a-partir-del-modelo-se-estudiará-la-significatividad-de-las-variables-de-este-y-luego-se-realizará-un-estudio-de-los-residuos-para-ello-se-utilizaran-correlogramas-el-test-ljung-box-y-un-gráfico-normal-qq-plot." class="section level5">
-<h5>La idea es utilizar en el programa R studio una función llamada auto.arima, la cual aplica de forma reiterativa las distintas combinaciones posibles con el fin de encontrar el modelo ARIMA que minimice el criterio de información de Akkaike. A partir del modelo se estudiará la significatividad de las variables de este y luego se realizará un estudio de los residuos, para ello se utilizaran correlogramas, el test Ljung-Box, y un gráfico Normal qq-plot.</h5>
-<div/>
-<p> </p>
- 
-<div style="text-align: justify">
+<div id="el-enfoque-de-análisis-que-utilizaremos-el-estudio-de-box-y-jenkin-modelos-conocidos-como-arima-pdq-autoregresivos-integrados-y-de-medias-móviles." class="section level5">
+<h5>El enfoque de análisis que utilizaremos el estudio de Box y Jenkin modelos conocidos como ARIMA (p,d,q): Autoregresivos, Integrados y de Medias móviles.</h5>
 </div>
-<div id="ejemplo-modelo-elegido-para-estimar-los-fallecimientos-acumulados" class="section level3">
-<h3>EJEMPLO (modelo elegido para estimar los fallecimientos acumulados):</h3>
+<div id="utilizaremos-en-r-studio-la-función-auto.arima-la-cual-nos-devuelve-el-modelo-que-minimiza-el-criterio-de-información-de-akaike-y-el-criterio-de-información-bayesiando.-este-paso-nos-ahorra-realizar-a-partir-de-los-datos-distintos-procesos-para-convertir-nuestra-serie-en-estacionaria." class="section level5">
+<h5>Utilizaremos en R-studio la función auto.arima, la cual nos devuelve el modelo que minimiza el criterio de información de Akaike y el criterio de información Bayesiando. Este paso nos ahorra realizar a partir de los datos distintos procesos para convertir nuestra serie en estacionaria.</h5>
+</div>
+<div id="el-siguiente-paso-consistirá-en-la-validación-del-modelo-uno-de-los-criterios-ya-es-utilizado-por-la-función-auto.arima-el-criterio-de-la-bondad-del-ajuste-mediante-el-coeficiente-aic-y-el-coeficiente-bic.-este-criterio-de-valoración-se-basa-en-el-ajuste-del-modelo-a-los-datos-observados." class="section level5">
+<h5>El siguiente paso consistirá en la validación del modelo, uno de los criterios ya es utilizado por la función auto.arima, el criterio de la bondad del ajuste, mediante el coeficiente AIC y el coeficiente BIC. Este criterio de valoración se basa en el ajuste del modelo a los datos observados.</h5>
+</div>
+<div id="luego-podemos-realizar-un-contraste-de-significación-de-los-coeficientes" class="section level5">
+<h5>Luego podemos realizar un contraste de significación de los coeficientes:</h5>
 <div/>
 <p> </p>
-<div id="significatividad-de-los-predictores." class="section level4">
-<h4>- Significatividad de los predictores.</h4>
 <pre><code>## 
 ## z test of coefficients:
 ## 
-##     Estimate Std. Error z value  Pr(&gt;|z|)    
-## ar1 -0.75681    0.14167 -5.3422 9.181e-08 ***
+##      Estimate Std. Error  z value  Pr(&gt;|z|)    
+## ar1 -1.671872   0.070566 -23.6924 &lt; 2.2e-16 ***
+## ar2 -0.933436   0.056665 -16.4728 &lt; 2.2e-16 ***
+## ma1  0.630304   0.150644   4.1841 2.863e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
-<div id="correlograma-de-los-residuos." class="section level4">
-<h4>- Correlograma de los residuos.</h4>
-<p><img src="about_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div id="será-necesario-realizar-un-análisis-de-los-residuos-alguno-de-los-métodos-de-análisis-más-comunes-se-muestran-a-continuación." class="section level5">
+<h5>Será necesario realizar un análisis de los residuos, alguno de los métodos de análisis más comunes se muestran a continuación.</h5>
 </div>
-<div id="significatividad-de-los-residuos" class="section level4">
-<h4>- Significatividad de los residuos</h4>
-<pre><code>##   m    Qm    pvalue
-##   1  1.91 0.1667294
-##   2  2.19 0.1390727
-##   3  2.26 0.1331793
-##   4  2.91 0.2336564
-##   5  3.72 0.2927373
-##   6  4.74 0.3152942
-##   7  4.75 0.4475088
-##   8  4.80 0.5698659
-##   9  5.22 0.6327896
-##  10  7.19 0.5162061
-##  11  9.19 0.4195647
-##  12  9.49 0.4862935
-##  13 11.71 0.3860042
-##  14 11.83 0.4596208
-##  15 11.92 0.5343638
-##  16 12.31 0.5813213
-##  17 12.79 0.6181911
-##  18 12.94 0.6770325
-##  19 12.94 0.7399987
-##  20 13.55 0.7581159
-##  21 13.92 0.7884059
-##  22 14.02 0.8294675
-##  23 14.06 0.8668506
-##  24 14.09 0.8984087
-##  25 14.14 0.9227011
-##  26 14.55 0.9332826
-##  27 14.74 0.9472271
-##  28 14.76 0.9615077
-##  29 14.96 0.9700421
-##  30 14.99 0.9785488</code></pre>
+<div id="correlograma-de-los-residuos" class="section level5">
+<h5>- Correlograma de los residuos:</h5>
+<p><img src="about_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="normalidad-de-los-residuos." class="section level4">
-<h4>- Normalidad de los residuos.</h4>
-<p><img src="about_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div id="significatividad-de-los-residuos" class="section level5">
+<h5>- Significatividad de los residuos:</h5>
+<pre><code>##   m   Qm    pvalue
+##   1 0.27 0.6046729
+##   2 1.66 0.1969612
+##   3 1.89 0.1688373
+##   4 3.01 0.2224509
+##   5 4.27 0.2337890
+##   6 4.33 0.3628754
+##   7 4.70 0.4534629
+##   8 5.08 0.5335103
+##   9 5.31 0.6215916
+##  10 7.71 0.4621424
+##  11 7.93 0.5412375
+##  12 8.17 0.6124462
+##  13 8.21 0.6947668
+##  14 8.32 0.7599401
+##  15 8.81 0.7869332
+##  16 8.82 0.8422749
+##  17 8.92 0.8818287
+##  18 8.92 0.9166531
+##  19 8.93 0.9425185
+##  20 8.93 0.9613892
+##  21 8.93 0.9745944
+##  22 8.94 0.9835556
+##  23 8.94 0.9896411
+##  24 9.02 0.9932395
+##  25 9.30 0.9948520
+##  26 9.41 0.9965910
+##  27 9.42 0.9979403
+##  28 9.46 0.9987488
+##  29 9.51 0.9992422
+##  30 9.59 0.9995313</code></pre>
 </div>
+<div id="normalidad-de-los-residuos" class="section level5">
+<h5>- Normalidad de los residuos:</h5>
+<p><img src="about_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre><code>## 
+##  Jarque Bera Test
+## 
+## data:  modelo$residuals
+## X-squared = 0.023937, df = 2, p-value = 0.9881</code></pre>
+</div>
+<div id="una-vez-seleccionado-el-modelo-realizaremos-su-estimación-mediante-la-función-forecast-la-siguiente-gráfica-se-encuentra-en-escala-logarítmica" class="section level5">
+<h5>Una vez seleccionado el modelo, realizaremos su estimación mediante la función forecast, la siguiente gráfica se encuentra en escala logarítmica:</h5>
+<p><img src="about_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="por-último-durante-el-transcurso-de-los-días-iremos-observando-como-se-comporta-nuestro-modelo-en-cada-una-de-las-variables-e-iremos-calculando-los-errores-en-las-estimaciones-que-nos-proporciona." class="section level5">
+<h5>Por último durante el transcurso de los días iremos observando como se comporta nuestro modelo en cada una de las variables e iremos calculando los errores en las estimaciones que nos proporciona.</h5>
 </div>
 
 

@@ -27,8 +27,8 @@ predicciones_11_04<-read_xlsx("C:/Users/DIEGO/Desktop/covid19mcaf.github.io/Dato
 casos_nacional<-as.ts(log(datos_obs_casos_nacional))
 library(forecast)
 library(ggplot2)
-modelo<-auto.arima(casos_nacional)
-pronostico_casos<- forecast(modelo,5,level=95)
+modelo11_04<-auto.arima(casos_nacional)
+pronostico_casos<- forecast(modelo11_04,5,level=95)
 #PREDICCIONES 12-04
 casos_nacional_1204<-as.ts(log(datos_obs_casos_1204))
 modelo_1204<-auto.arima(casos_nacional_1204)
